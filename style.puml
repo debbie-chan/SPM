@@ -1,0 +1,12 @@
+skinparam Shadowing false
+skinparam classAttributeIconSize 0
+
+skinparam class {
+    FontStyle bold
+}
+
+skinparam abstract {
+    FontStyle italic
+}
+
+hide circle
