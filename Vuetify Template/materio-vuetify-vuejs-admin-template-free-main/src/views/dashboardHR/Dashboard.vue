@@ -1,5 +1,24 @@
 <template>
   <v-row>
+    <v-col cols="12">
+      <div class="mb-4 d-flex">
+        <span class= "font-weight-semibold text-xl"> Ongoing/Upcoming Courses: </span>
+        <v-btn
+          medium
+          color= 'primary'
+          class= 'ml-5 font-weight-semibold'
+        >
+          + New Course
+        </v-btn>
+      </div>
+      <dashboard-current-table></dashboard-current-table>
+    </v-col>
+    <v-col cols="12">
+      <div class="mb-4 d-flex">
+        <span class= "font-weight-semibold text-xl"> Completed Courses: </span>
+      </div>
+      <dashboard-completed-table></dashboard-completed-table>
+    </v-col>
     <v-col
       cols="12"
       md="4"
@@ -89,7 +108,6 @@
         </v-col>
       </v-row>
     </v-col>
-
     <v-col
       cols="12"
       md="4"
@@ -101,9 +119,6 @@
       md="8"
     >
       <dashboard-card-deposit-and-withdraw></dashboard-card-deposit-and-withdraw>
-    </v-col>
-    <v-col cols="12">
-      <dashboard-datatable></dashboard-datatable>
     </v-col>
   </v-row>
 </template>
@@ -120,7 +135,8 @@ import DashboardCardTotalEarning from './DashboardCardTotalEarning.vue'
 import DashboardCardDepositAndWithdraw from './DashboardCardDepositAndWithdraw.vue'
 import DashboardCardSalesByCountries from './DashboardCardSalesByCountries.vue'
 import DashboardWeeklyOverview from './DashboardWeeklyOverview.vue'
-import DashboardDatatable from './DashboardDatatable.vue'
+import DashboardCurrentTable from './DashboardCurrentTable.vue'
+import DashboardCompletedTable from './DashboardCompletedTable.vue'
 
 export default {
   components: {
@@ -131,7 +147,8 @@ export default {
     DashboardCardDepositAndWithdraw,
     DashboardCardSalesByCountries,
     DashboardWeeklyOverview,
-    DashboardDatatable,
+    DashboardCurrentTable,
+    DashboardCompletedTable,
   },
   setup() {
     const totalProfit = {

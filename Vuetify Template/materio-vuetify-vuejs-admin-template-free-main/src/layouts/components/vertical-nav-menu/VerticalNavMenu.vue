@@ -25,7 +25,7 @@
         ></v-img>
         <v-slide-x-transition>
           <h2 class="app-title text--primary">
-            SPM
+            LMS
           </h2>
         </v-slide-x-transition>
       </router-link>
@@ -38,8 +38,18 @@
       class="vertical-nav-menu-items pr-5"
     >
       <nav-menu-link
-        title="Dashboard"
-        :to="{ name: 'dashboard' }"
+        title="Dashboard Learner"
+        :to="{ name: 'dashboardLearner' }"
+        :icon="icons.mdiHomeOutline"
+      ></nav-menu-link>
+      <nav-menu-link
+        title="Dashboard Trainer"
+        :to="{ name: 'dashboardTrainer' }"
+        :icon="icons.mdiHomeOutline"
+      ></nav-menu-link>
+      <nav-menu-link
+        title="Dashboard HR"
+        :to="{ name: 'dashboardHR' }"
         :icon="icons.mdiHomeOutline"
       ></nav-menu-link>
       <nav-menu-link
