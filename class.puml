@@ -2,8 +2,8 @@
 !include style.puml
 
 package User {
-    User <|-- Administrator
-    User <|-- Engineer
+    User <|.. Administrator
+    User <|.. Engineer
     Engineer <|-- Trainer
     Engineer <|-- Learner
     
@@ -17,8 +17,8 @@ package Course {
     Class *-- GradedQuiz
     Chapter *-- CourseMaterials
     Chapter *-- UngradedQuiz
-    Quiz <|-- GradedQuiz
-    Quiz <|-- UngradedQuiz
+    Quiz <|.. GradedQuiz
+    Quiz <|.. UngradedQuiz
 }
 
 abstract class User #technology {
@@ -99,18 +99,27 @@ class GradedQuiz #technology {
 }
 
 class UngradedQuiz #technology {
-
+    - passed: Boolean
 }
 
-class DataAccess #motivation {
+' class CourseDataAccess #motivation {
 
-}
+' }
 
-class Controller #business {
+' class CRDataAccess #motivation {
+'     + Create(CRDetails)
+'     + findLearner()
+' }
 
-}
+' class DataAccess #motivation {
 
-class Authenticate #implementation {
+' }
 
-}
+' class Authenticate #business {
+
+' }
+
+' class Controller #implementation {
+
+' }
 @enduml
