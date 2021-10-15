@@ -24,6 +24,16 @@ const routes = [
     component: () => import('@/views/dashboardHR/Dashboard.vue'),
   },
   {
+    path: '/trainer/quizCreation',
+    name: 'quizCreation',
+    component: () => import('@/views/quizCreation/quizCreation.vue'),
+  },
+  {
+    path: '/HR/addNewCourse',
+    name: 'addNewCourse',
+    component: () => import('@/views/dashboardHR/courseCreation/addNewCourse.vue'),
+  },
+  {
     path: '/typography',
     name: 'typography',
     component: () => import('@/views/typography/Typography.vue'),
