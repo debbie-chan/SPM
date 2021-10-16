@@ -7,6 +7,7 @@
           medium
           color= 'primary'
           class= 'ml-5 font-weight-semibold'
+          to = "/HR/addNewCourse"
         >
           + New Course
         </v-btn>

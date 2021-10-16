@@ -37,6 +37,8 @@
       shaped
       class="vertical-nav-menu-items pr-5"
     >
+
+    <!-- start of dashboards -->
       <nav-menu-link
         title="Dashboard Learner"
         :to="{ name: 'dashboardLearner' }"
@@ -52,6 +54,15 @@
         :to="{ name: 'dashboardHR' }"
         :icon="icons.mdiHomeOutline"
       ></nav-menu-link>
+    <!-- end of dashboards -->
+
+    <!-- start of quiz creation -->
+      <nav-menu-link
+        title="Quiz Creation"
+        :to="{ name: 'quizCreation' }"
+        :icon="icons.mdiHomeOutline"
+      ></nav-menu-link>
+    <!-- end of quiz creation -->
       <nav-menu-link
         title="Account Settings"
         :to="{ name: 'pages-account-settings'}"
