@@ -27,7 +27,7 @@
         </v-list-item>
 
         <v-card-actions>
-          <v-btn
+          <v-btn @click="$router.push('simple-table')"
             medium
             color= "primary"
           >

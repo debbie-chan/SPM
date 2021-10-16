@@ -1,9 +1,32 @@
 <template>
   <v-row>
+    <h1>Course 1 : Class 1</h1>
+    <v-col cols="12">
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            Class Materials
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="index"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-col>
     <!-- basic -->
     <v-col cols="12">
       <v-card>
-        <v-card-title>Basic</v-card-title>
+        <v-card-title>Chapter 1</v-card-title>
         <demo-simple-table-basic></demo-simple-table-basic>
       </v-card>
     </v-col>
@@ -73,5 +96,13 @@ export default {
   setup() {
     return {}
   },
+  data: () => ({
+    items: [
+      { title: 'Chapter 1' },
+      { title: 'Chapter 2' },
+      { title: 'Chapter 3' },
+      { title: 'Chapter 4' },
+    ],
+  }),
 }
 </script>
