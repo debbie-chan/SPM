@@ -62,7 +62,6 @@
         :icon="icons.mdiHomeOutline"
       ></nav-menu-link>
       <!-- end of quiz creation -->
-      
       <!-- start of all courses -->
       <nav-menu-link
         title="All Courses"
