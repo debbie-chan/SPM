@@ -2,42 +2,34 @@
 !include style.puml
 
 package User {
-    User <|.. Administrator
-    User <|.. Engineer
-    Engineer <|-- Trainer
-    Engineer <|-- Learner
+    User <|.. Admin
+    User <|.. Trainer
+    User <|.. Learner
     
 }
 
 package Course {
-    Course *-- Class
     Trainer -- Class
-    Engineer -- Class
+    Learner -- Class
+    Course *-- Class
     Class *-- Chapter
     Class *-- GradedQuiz
-    Chapter *-- CourseMaterials
     Chapter *-- UngradedQuiz
-    Quiz <|.. GradedQuiz
-    Quiz <|.. UngradedQuiz
 }
 
 abstract class User #technology {
-    - UserID: String
-    - UserName: String
-    - Password: hash
-    - Designation: String
-    - Department: String
+    - userID: String
+    - username: String
+    - password: hash
+    - designation: String
+    - department: String
     + addUser()
     + editUser()
     + deleteUser()
     + searchUser()
 }
 
-class Administrator #technology {
-
-}
-
-class Engineer #technology {
+class Admin #technology {
 
 }
 
@@ -47,55 +39,76 @@ class Trainer #technology {
 }
 
 class Learner #technology {
-    - EnrolledCourses: List
-    - AttemptedCourses: List
-    - CompletedCourses: List
+    - enrolledCourses: List
+    - attemptedCourses: List
+    - completedCourses: List
     + SelfEnroll(CourseID): Boolean
 }
 
 class Course #technology {
-    - CourseID: String
-    - CourseName: String
-    - CourseDescription: String
-    - EnrolledLearners: List
-    - PreRequisites: List
+    - courseID: String
+    - courseName: String
+    - courseDescription: String
+    - enrolledLearners: List
+    - preRequisites: List
 }
 
 class Class #technology {
-    - ClassID: String
-    - ClassName: String
-    - StartDate: Date
-    - EndDate: Date
-    - StartTime: Time
-    - EndTime:Time
-    - ClassSize: int
-    - TrainerName:String
-    - MaxEnrollment: int
-    - EnrollmentStartDate: Date
-    - EnrollmentEndDate: Date
+    - classID: String
+    - className: String
+    - classSize: int
+    - startDate: Date
+    - endDate: Date
+    - startTime: Time
+    - endTime:Time
+    - trainerName:String
+    - maxEnrollment: int
+    - enrollmentStartDate: Date
+    - enrollmentEndDate: Date
 }
 
 class Chapter #technology {
-    - SectionID: String
-    - SectionName: String
+    - sectionID: String
+    - sectionName: String
+    - courseMaterials
 }
 
-class CourseMaterials #technology {
-    - Documents: List?
-    - Videos: List?
-    - Hyperlinks: List
+package Quiz {
+    Quiz <|.. GradedQuiz
+    Quiz <|.. UngradedQuiz
+    Quiz -- Question
+    Question -- GradeableQuestion
+    Gradeable -- GradeableQuestion
 }
 
 abstract class Quiz #technology {
-    - QuizID: String
-    - QuizName: String
-    - QuizDuration: Time
+    - quizID: String
+    - quizName: String
+    - quizDuration: Time
     
 }
 
+class Question #technology {
+    - DEFAULT_GUESS = 0
+    - options: Array
+    - guess: int
+
+}
+
+interface Gradeable #technology {
+    + mark(): int
+}
+
+abstract class GradeableQuestion #technology {
+    + mark(): int
+    + lock(): Gradeable
+}
+
+
+
 class GradedQuiz #technology {
-    - TotalScore: int
-    - LearnerScore: int
+    - totalScore: int
+    - learnerScore: int
 }
 
 class UngradedQuiz #technology {
