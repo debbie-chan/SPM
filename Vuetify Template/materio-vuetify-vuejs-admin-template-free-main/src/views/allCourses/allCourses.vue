@@ -17,6 +17,11 @@
           ></v-img>
           <v-card-title>
             Course 1
+            <v-chip
+              class="ma-2"
+            >
+              Eligible
+            </v-chip>
           </v-card-title>
           <v-card-text>
             Some description here
@@ -60,6 +65,11 @@
           ></v-img>
           <v-card-title>
             Course 2
+            <v-chip
+              class="ma-2"
+            >
+              Eligible
+            </v-chip>
           </v-card-title>
           <v-card-text>
             Some description here
@@ -74,13 +84,13 @@
             <v-spacer></v-spacer>
             <v-btn
               icon
-              @click="isCardDetailsVisible = !isCardDetailsVisible"
+              @click="isCardDetailsVisible1 = !isCardDetailsVisible1"
             >
-              <v-icon>{{ isCardDetailsVisible ? icons.mdiChevronUp : icons.mdiChevronDown }}</v-icon>
+              <v-icon>{{ isCardDetailsVisible1 ? icons.mdiChevronUp : icons.mdiChevronDown }}</v-icon>
             </v-btn>
           </v-card-actions>
           <v-expand-transition>
-            <div v-show="isCardDetailsVisible">
+            <div v-show="isCardDetailsVisible1">
               <v-divider></v-divider>
               <v-card-text>
                 Detailed description here
@@ -103,6 +113,11 @@
           ></v-img>
           <v-card-title>
             Course 3
+            <v-chip
+              class="ma-2"
+            >
+              Eligible
+            </v-chip>
           </v-card-title>
           <v-card-text>
             Some description here
@@ -117,13 +132,13 @@
             <v-spacer></v-spacer>
             <v-btn
               icon
-              @click="isCardDetailsVisible = !isCardDetailsVisible"
+              @click="isCardDetailsVisible2 = !isCardDetailsVisible2"
             >
-              <v-icon>{{ isCardDetailsVisible ? icons.mdiChevronUp : icons.mdiChevronDown }}</v-icon>
+              <v-icon>{{ isCardDetailsVisible2 ? icons.mdiChevronUp : icons.mdiChevronDown }}</v-icon>
             </v-btn>
           </v-card-actions>
           <v-expand-transition>
-            <div v-show="isCardDetailsVisible">
+            <div v-show="isCardDetailsVisible2">
               <v-divider></v-divider>
               <v-card-text>
                 Detailed description here
@@ -141,6 +156,10 @@ import { ref } from '@vue/composition-api'
 import {
   mdiChevronUp,
   mdiChevronDown,
+  mdiChevronUp1,
+  mdiChevronDown1,
+  mdiChevronUp2,
+  mdiChevronDown2,
   mdiCartPlus,
   mdiShareVariantOutline,
   mdiLockOpenOutline,
@@ -153,16 +172,24 @@ import {
 export default {
   setup() {
     const isCardDetailsVisible = false
+    const isCardDetailsVisible1 = false
+    const isCardDetailsVisible2 = false
     const rating = ref(5)
 
     return {
       isCardDetailsVisible,
+      isCardDetailsVisible1,
+      isCardDetailsVisible2,
       rating,
 
       // icons
       icons: {
         mdiChevronUp,
         mdiChevronDown,
+        mdiChevronUp1,
+        mdiChevronDown1,
+        mdiChevronUp2,
+        mdiChevronDown2,
         mdiCartPlus,
         mdiShareVariantOutline,
         mdiLockOpenOutline,
