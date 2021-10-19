@@ -29,6 +29,11 @@ const routes = [
     component: () => import('@/views/quizCreation/quizCreation.vue'),
   },
   {
+    path: '/allCourses',
+    name: 'allCourses',
+    component: () => import('@/views/allCourses/allCourses.vue'),
+  },
+  {
     path: '/HR/addNewCourse',
     name: 'addNewCourse',
     component: () => import('@/views/dashboardHR/courseCreation/addNewCourse.vue'),

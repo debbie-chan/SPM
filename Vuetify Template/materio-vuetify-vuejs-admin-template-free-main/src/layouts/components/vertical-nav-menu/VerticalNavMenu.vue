@@ -37,8 +37,7 @@
       shaped
       class="vertical-nav-menu-items pr-5"
     >
-
-    <!-- start of dashboards -->
+      <!-- start of dashboards -->
       <nav-menu-link
         title="Dashboard Learner"
         :to="{ name: 'dashboardLearner' }"
@@ -54,15 +53,22 @@
         :to="{ name: 'dashboardHR' }"
         :icon="icons.mdiHomeOutline"
       ></nav-menu-link>
-    <!-- end of dashboards -->
+      <!-- end of dashboards -->
 
-    <!-- start of quiz creation -->
+      <!-- start of quiz creation -->
       <nav-menu-link
         title="Quiz Creation"
         :to="{ name: 'quizCreation' }"
         :icon="icons.mdiHomeOutline"
       ></nav-menu-link>
-    <!-- end of quiz creation -->
+      <!-- end of quiz creation -->
+      <!-- start of all courses -->
+      <nav-menu-link
+        title="All Courses"
+        :to="{ name: 'allCourses' }"
+        :icon="icons.mdiHomeOutline"
+      ></nav-menu-link>
+      <!-- end of all courses -->
       <nav-menu-link
         title="Account Settings"
         :to="{ name: 'pages-account-settings'}"
