@@ -12,9 +12,9 @@ package Course {
     Trainer -- Class
     Learner -- Class
     Course *-- Class
-    Class *-- Chapter
+    Class *-- Lesson
     Class *-- GradedQuiz
-    Chapter *-- UngradedQuiz
+    Lesson *-- UngradedQuiz
 }
 
 abstract class User #technology {
@@ -23,25 +23,21 @@ abstract class User #technology {
     - password: hash
     - designation: String
     - department: String
-    + addUser()
-    + editUser()
-    + deleteUser()
-    + searchUser()
 }
 
 class Admin #technology {
-
 }
 
 class Trainer #technology {
-    - AssignedCourses: List
+    - trainingCourses: Array
+    - trainedCourses: Array
 
 }
 
 class Learner #technology {
-    - enrolledCourses: List
-    - attemptedCourses: List
-    - completedCourses: List
+    - enrolledCourses: Array
+    - attemptedCourses: Array
+    - completedCourses: Array
     + SelfEnroll(CourseID): Boolean
 }
 
@@ -49,62 +45,50 @@ class Course #technology {
     - courseID: String
     - courseName: String
     - courseDescription: String
-    - enrolledLearners: List
-    - preRequisites: List
+    - enrolledLearners: Array
+    - preRequisites: Array
 }
 
 class Class #technology {
     - classID: String
     - className: String
+    - trainerName:String
     - classSize: int
     - startDate: Date
     - endDate: Date
     - startTime: Time
     - endTime:Time
-    - trainerName:String
     - maxEnrollment: int
     - enrollmentStartDate: Date
     - enrollmentEndDate: Date
 }
 
-class Chapter #technology {
-    - sectionID: String
-    - sectionName: String
-    - courseMaterials
+class Lesson #technology {
+    - lessonID: String
+    - lessonName: String
+    - lessonMaterials
 }
 
 package Quiz {
     Quiz <|.. GradedQuiz
     Quiz <|.. UngradedQuiz
     Quiz -- Question
-    Question -- GradeableQuestion
-    Gradeable -- GradeableQuestion
 }
 
 abstract class Quiz #technology {
     - quizID: String
     - quizName: String
+    - quizType: String
     - quizDuration: Time
     
 }
 
 class Question #technology {
-    - DEFAULT_GUESS = 0
+    - description: String
     - options: Array
     - guess: int
 
 }
-
-interface Gradeable #technology {
-    + mark(): int
-}
-
-abstract class GradeableQuestion #technology {
-    + mark(): int
-    + lock(): Gradeable
-}
-
-
 
 class GradedQuiz #technology {
     - totalScore: int
@@ -114,25 +98,4 @@ class GradedQuiz #technology {
 class UngradedQuiz #technology {
     - passed: Boolean
 }
-
-' class CourseDataAccess #motivation {
-
-' }
-
-' class CRDataAccess #motivation {
-'     + Create(CRDetails)
-'     + findLearner()
-' }
-
-' class DataAccess #motivation {
-
-' }
-
-' class Authenticate #business {
-
-' }
-
-' class Controller #implementation {
-
-' }
 @enduml
