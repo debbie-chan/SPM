@@ -1,26 +1,10 @@
 from main import *
 
 # class Course():
-#     __tablename__ = "course"
-
-#     CourseID = db.Column(db.String, primary_key=True)
-#     CourseName = db.Column(db.String(50))
-#     CourseDescription = db.Column(db.String(1000))
-#     PreRequisites = db.Column(db.List())
-
-#     def getEnrolledLearners(self):
-#         pass
-
-# class EnrolledLearners(Course):
-#     __tablename__ = 'enrolledLearners'
-
-    
 
 # class Class(Course):
 
 # class Lesson(Class):
-
-    
 
 
 @app.route('/courses', methods=['GET'])
@@ -55,25 +39,49 @@ def addCourse():
 
 @app.route("/addClass")
 def addClass():
-    classDocument = {"_id":"G1",
-                    "className":"G1",
-                    "trainerID":1,
-                    "startDate":datetime(2021, 1, 1),
-                    "endDate":datetime(2021, 1, 1),
-                    "startTime":datetime(2021, 1, 1),
-                    "endTime":datetime(2021, 1, 1),
-                    "classSize":30,
-                    "maxEnrollment":45,
-                    "enrollmentStartDate":datetime(2021, 1, 1),
-                    "enrollmentEndDate":datetime(2021, 1, 1)}
+    classDocument = {"_id": "G1",
+                    "className": "G1",
+                    "trainerID": 1,
+                    "startDate": datetime(2021, 1, 1),
+                    "endDate": datetime(2021, 1, 1),
+                    "startTime": datetime(2021, 1, 1),
+                    "endTime": datetime(2021, 1, 1),
+                    "classSize": 30,
+                    "maxEnrollment": 45,
+                    "enrollmentStartDate": datetime(2021, 1, 1),
+                    "enrollmentEndDate": datetime(2021, 1, 1),
+                    "classQuiz": {
+                        "quizName": "Quiz 1",
+                        "timeLimit": 100,
+                        "questions": {
+                            1: {
+                                "prompt": "Why did the chicken cross the road?",
+                                "options": ["because", "yes", "no", "idk"],
+                                "answer": "yes"
+                                },
+                            2: {
+                                "prompt": "How did the chicken cross the road?",
+                                "options": ["because", "yes", "no", "idk"],
+                                "answer": "yes"
+                            }}}}
     coursedb["class"].insert_one(classDocument)
     return jsonify(message="success")
 
 @app.route("/addLesson")
 def addLesson():
-    lessonDocument = {"_id":"IS113",
-                    "lessonName":"Week 1",
-                    "courseDescription":"WAD",
-                    "preRequisites":["IS111"]}
+    lessonDocument = {"_id": "IS113",
+                    "lessonName": "Week 1",
+                    "lessonDescription": "WAD",
+                    "lessonQuiz": {
+                        1: {
+                            "prompt": "Why did the chicken cross the road?",
+                            "options": ["because", "yes", "no", "idk"],
+                            "answer": "yes"
+                            },
+                        2: {
+                            "prompt": "How did the chicken cross the road?",
+                            "options": ["because", "yes", "no", "idk"],
+                            "answer": "yes"
+                        }}}
     coursedb.lesson.insert_one(lessonDocument)
     return jsonify(message="success")
