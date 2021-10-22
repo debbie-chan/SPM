@@ -1,13 +1,24 @@
 <template>
   <v-row>
-    <h1>Course 1 : Class 1</h1>
-    <v-col cols= '12'>
+    <v-col cols = '12'>
+      <h1>Course 1 : Class 1</h1>
+    </v-col>
+    <v-col cols= '9'>
         <v-btn
           color="primary"
           dark
           @click = allChapters()
         >
           Add Chapter
+        </v-btn>
+    </v-col>
+    <v-col cols= '3'>
+        <v-btn
+          color="primary"
+          dark
+          to = '/Trainer/studentProgress'
+        >
+          View Students' Progress
         </v-btn>
     </v-col>
     <v-col cols="12"

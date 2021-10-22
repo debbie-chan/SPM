@@ -39,6 +39,11 @@ const routes = [
     component: () => import('@/views/dashboardTrainer/indivCourses.vue'),
   },
   {
+    path: '/Trainer/studentProgress',
+    name: 'TrainerStudentProgress',
+    component: () => import('@/views/dashboardTrainer/studentProgress.vue'),
+  },
+  {
     path: '/dashboardHR',
     name: 'dashboardHR',
     component: () => import('@/views/dashboardHR/Dashboard.vue'),
