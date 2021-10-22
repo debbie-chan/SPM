@@ -27,9 +27,10 @@
         </v-list-item>
 
         <v-card-actions>
-          <v-btn @click="$router.push('simple-table')"
+          <v-btn
             medium
             color= "primary"
+            to = "/Learner/indivCourse"
           >
             Go to Class
           </v-btn>

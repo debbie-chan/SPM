@@ -14,14 +14,39 @@ const routes = [
     component: () => import('@/views/dashboardLearner/Dashboard.vue'),
   },
   {
+    path: '/Learner/indivCourse',
+    name: 'learnerIndivCourse',
+    component: () => import('@/views/dashboardLearner/indivCourses.vue'),
+  },
+  {
+    path: '/HR/indivCourse',
+    name: 'HRIndivCourse',
+    component: () => import('@/views/dashboardHR/indivCourse/indivCourse.vue'),
+  },
+  {
+    path: '/takeQuiz',
+    name: 'takeQuiz',
+    component: () => import('@/views/takeQuiz/takeQuiz.vue'),
+  },
+  {
     path: '/dashboardTrainer',
     name: 'dashboardTrainer',
     component: () => import('@/views/dashboardTrainer/Dashboard.vue'),
   },
   {
+    path: '/Trainer/indivCourse',
+    name: 'TrainerIndivCourse',
+    component: () => import('@/views/dashboardTrainer/indivCourses.vue'),
+  },
+  {
     path: '/dashboardHR',
     name: 'dashboardHR',
     component: () => import('@/views/dashboardHR/Dashboard.vue'),
+  },
+  {
+    path: '/editClass',
+    name: 'editClass',
+    component: () => import('@/views/dashboardHR/editClass/editAssignedStudents.vue'),
   },
   {
     path: '/trainer/quizCreation',
