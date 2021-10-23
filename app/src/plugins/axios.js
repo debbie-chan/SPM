@@ -1,11 +1,16 @@
-import ax from 'axios'
+import Vue from 'vue'
 
-// insert all your axios logic here
+// axios
+import axios from 'axios'
 
-export const axios = ax
+const axiosIns = axios.create({
+  // You can add your headers here
+  // ================================
+  baseURL: 'https://127.0.0.1:5000/',
+  // timeout: 1000,
+  // headers: {'X-Custom-Header': 'foobar'}
+})
 
-export default {
-  install(Vue, options) {
-    Vue.prototype.$axios = ax
-  },
-}
+Vue.prototype.$http = axiosIns
+
+export default axiosIns

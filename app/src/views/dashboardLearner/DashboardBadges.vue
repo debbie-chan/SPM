@@ -8,7 +8,7 @@
         <v-card-text class="d-flex align-center mt-2 ms-5 pb-2 ps-5">
           <div class='row'>
             <div
-              v-for= "index in 6" :key="index"
+              v-for= "(course, index) in completedCourses" :key="index"
               class="col-md-3"
               >
               <p>
@@ -21,7 +21,7 @@
                 ></v-img>
               </p>
               <p>
-                Course {{index}}
+                {{course}} {{index}}
               </p>
             </div>
           </div>
@@ -68,3 +68,9 @@
   }
 }
 </style>
+
+<script>
+  export default {
+    props: ['completedCourses']
+  }
+</script>

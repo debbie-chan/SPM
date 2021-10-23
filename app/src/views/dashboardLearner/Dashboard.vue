@@ -4,7 +4,7 @@
       cols="12"
       md="12"
     >
-      <dashboard-badges></dashboard-badges>
+      <dashboard-badges completedCourses=completedCourses></dashboard-badges>
     </v-col>
     <v-col
       cols="12"
@@ -204,9 +204,25 @@ export default {
       salesQueries,
     }
   },
-  mounted() {
-    const axios = require('axios')
-    axios.get('http://localhost:5000/admin')
+  data() {
+    return {
+      completedCourses: [],
+    }
+  },
+  methods: {
+    getCourses() {
+      const path = 'http://localhost:5000/learner/1';
+      this$axios.get(path)
+        .then((res) => {
+          this.courses = res.data.completedCourses;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+  created() {
+    this.getCourses();
   },
 }
 </script>
