@@ -204,5 +204,9 @@ export default {
       salesQueries,
     }
   },
+  mounted() {
+    const axios = require('axios')
+    axios.get('http://localhost:5000/admin')
+  },
 }
 </script>

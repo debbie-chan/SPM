@@ -24,7 +24,7 @@ const routes = [
     component: () => import('@/views/dashboardHR/indivCourse/indivCourse.vue'),
   },
   {
-    path: '/takeQuiz',
+    path: '/Learner/takeQuiz',
     name: 'takeQuiz',
     component: () => import('@/views/takeQuiz/takeQuiz.vue'),
   },
