@@ -1,6 +1,8 @@
 from main import *
 
-# class Course():
+class Course():
+    def slotsAvailable(self):
+        return currentEnrollment < maxEnrollment
 
 # class Class(Course):
 
@@ -46,7 +48,7 @@ def addClass():
                     "endDate": datetime(2021, 1, 1),
                     "startTime": datetime(2021, 1, 1),
                     "endTime": datetime(2021, 1, 1),
-                    "classSize": 30,
+                    "currentEnrollment": 30,
                     "maxEnrollment": 45,
                     "enrollmentStartDate": datetime(2021, 1, 1),
                     "enrollmentEndDate": datetime(2021, 1, 1),

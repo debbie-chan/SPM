@@ -25,7 +25,7 @@ class Learner(User):
         User.__init__(self, id, username, roles)
         self.__attemptedCourses = attemptedCourses
 
-    def selfEnroll(courseId):
+    def canSelfEnroll(courseId):
         ifAttempted = courseId in self.__attemptedCourses
         return ifAttempted
 
@@ -41,12 +41,11 @@ def getOneUser(userRole, userId):
     oneUser = userdb[userRole].find_one_or_404({"_id": userId})
     return oneUser
 
-
 # methods
 @app.route("/learner/<string:userId>/selfEnroll/<string:courseId>")
 def addEnrolledCourse(userId, courseId):
     try:
-        Learner.selfEnroll(courseId)
+        Learner.canSelfEnroll(courseId) and Course.slotsAvailable
     except Exception:
         return jsonify({"message": "No."}), 500
     
@@ -60,6 +59,9 @@ def addEnrolledCourse(userId, courseId):
 @app.route("/addAdmin")
 def addAdmin():
     userDocument = {"_id":"1",
+                    "employeeName": "yeet",
+                    "designation": "engineer",
+                    "department": "tech",
                     "username":"adminUser",
                     "password":"password"}
     out = userdb.admin.insert_one(userDocument)
@@ -68,6 +70,9 @@ def addAdmin():
 @app.route("/addTrainer")
 def addTrainer():
     userDocument = {"_id":"1",
+                    "employeeName": "yeet",
+                    "designation": "engineer",
+                    "department": "tech",
                     "username":"trainerUser",
                     "password":"password",
                     "trainingCourses":["IS111","CS2030"],
@@ -78,6 +83,9 @@ def addTrainer():
 @app.route("/addLearner")
 def addLearner():
     userDocument = {"_id": "1",
+                    "employeeName": "yeet",
+                    "designation": "engineer",
+                    "department": "tech",
                     "username": "learnerUser",
                     "password": "password",
                     "enrolledCourses": ["IS111","CS2030"],
