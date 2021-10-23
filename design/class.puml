@@ -1,0 +1,101 @@
+@startuml Class
+!include style.puml
+
+package User {
+    User <|.. Admin
+    User <|.. Trainer
+    User <|.. Learner
+    
+}
+
+package Course {
+    Trainer -- Class
+    Learner -- Class
+    Course *-- Class
+    Class *-- Lesson
+    Class *-- GradedQuiz
+    Lesson *-- UngradedQuiz
+}
+
+abstract class User #technology {
+    - userID: String
+    - username: String
+    - password: hash
+    - designation: String
+    - department: String
+}
+
+class Admin #technology {
+}
+
+class Trainer #technology {
+    - trainingCourses: Array
+    - trainedCourses: Array
+
+}
+
+class Learner #technology {
+    - enrolledCourses: Array
+    - attemptedCourses: Array
+    - completedCourses: Array
+    + SelfEnroll(CourseID): Boolean
+}
+
+class Course #technology {
+    - courseID: String
+    - courseName: String
+    - courseDescription: String
+    - enrolledLearners: Array
+    - preRequisites: Array
+}
+
+class Class #technology {
+    - classID: String
+    - className: String
+    - trainerName:String
+    - classSize: int
+    - startDate: Date
+    - endDate: Date
+    - startTime: Time
+    - endTime:Time
+    - maxEnrollment: int
+    - enrollmentStartDate: Date
+    - enrollmentEndDate: Date
+}
+
+class Lesson #technology {
+    - lessonID: String
+    - lessonName: String
+    - lessonMaterials
+}
+
+package Quiz {
+    Quiz <|.. GradedQuiz
+    Quiz <|.. UngradedQuiz
+    Quiz -- Question
+}
+
+abstract class Quiz #technology {
+    - quizID: String
+    - quizName: String
+    - quizType: String
+    - quizDuration: Time
+    
+}
+
+class Question #technology {
+    - description: String
+    - options: Array
+    - guess: int
+
+}
+
+class GradedQuiz #technology {
+    - totalScore: int
+    - learnerScore: int
+}
+
+class UngradedQuiz #technology {
+    - passed: Boolean
+}
+@enduml
