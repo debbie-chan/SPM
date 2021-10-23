@@ -30,6 +30,7 @@
           <v-btn
             medium
             color='primary'
+            to = '/Trainer/indivCourse'
           >
             Go to Class
           </v-btn>

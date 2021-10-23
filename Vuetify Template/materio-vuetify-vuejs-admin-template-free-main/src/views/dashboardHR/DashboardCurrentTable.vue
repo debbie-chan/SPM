@@ -11,7 +11,11 @@
       <!-- name -->
       <template #[`item.course_name`]="{item}">
         <div class="d-flex flex-column">
-          <span class="d-block font-weight-semibold text--primary text-truncate">{{ item.course_name }}</span>
+          <span class="d-block font-weight-semibold text--primary text-truncate">
+          <a href = '/HR/indivCourse'>
+            {{ item.course_name }}
+          </a>
+          </span>
         </div>
       </template>
       <!-- status -->
