@@ -4,7 +4,7 @@
       cols="12"
       md="12"
     >
-      <dashboard-badges completedCourses=completedCourses></dashboard-badges>
+      <dashboard-badges :completedCourse= completedCourse></dashboard-badges>
     </v-col>
     <v-col
       cols="12"
@@ -144,6 +144,7 @@ import DashboardDatatable from './DashboardDatatable.vue'
 import DashboardBadges from './DashboardBadges.vue'
 import DashboardMyCourses from './DashboardMyCourses.vue'
 import DashboardCompletedCourses from './DashboardCompletedCourses.vue'
+import axiosIns from '@/plugins/axios'
 
 export default {
   components: {
@@ -204,25 +205,20 @@ export default {
       salesQueries,
     }
   },
+
   data() {
     return {
-      completedCourses: [],
+      completedCourse: [],
     }
   },
-  methods: {
-    getCourses() {
-      const path = 'http://localhost:5000/learner/1';
-      this$axios.get(path)
-        .then((res) => {
-          this.courses = res.data.completedCourses;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-  },
-  created() {
-    this.getCourses();
+  mounted() {
+    axiosIns
+      .get('http://localhost:5000/courses')
+      .then(response => {
+        // console.log(response.data.courses)
+        this.completedCourse.push(response.data.courses)
+        console.log(this.completedCourse)
+      })
   },
 }
 </script>
