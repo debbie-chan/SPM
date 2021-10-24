@@ -2,124 +2,100 @@
 !include style.puml
 
 package User {
-    User <|.. Administrator
-    User <|.. Engineer
-    Engineer <|-- Trainer
-    Engineer <|-- Learner
+    User <|.. Admin
+    User <|.. Trainer
+    User <|.. Learner
     
 }
 
 package Course {
-    Course *-- Class
     Trainer -- Class
-    Engineer -- Class
-    Class *-- Chapter
+    Learner -- Class
+    Course *-- Class
+    Class *-- Lesson
     Class *-- GradedQuiz
-    Chapter *-- CourseMaterials
-    Chapter *-- UngradedQuiz
-    Quiz <|.. GradedQuiz
-    Quiz <|.. UngradedQuiz
+    Lesson *-- UngradedQuiz
 }
 
 abstract class User #technology {
-    - UserID: String
-    - UserName: String
-    - Password: hash
-    - Designation: String
-    - Department: String
-    + addUser()
-    + editUser()
-    + deleteUser()
-    + searchUser()
+    - userID: String
+    - username: String
+    - password: hash
+    - designation: String
+    - department: String
 }
 
-class Administrator #technology {
-
-}
-
-class Engineer #technology {
-
+class Admin #technology {
 }
 
 class Trainer #technology {
-    - AssignedCourses: List
+    - trainingCourses: Array
+    - trainedCourses: Array
 
 }
 
 class Learner #technology {
-    - EnrolledCourses: List
-    - AttemptedCourses: List
-    - CompletedCourses: List
+    - enrolledCourses: Array
+    - attemptedCourses: Array
+    - completedCourses: Array
     + SelfEnroll(CourseID): Boolean
 }
 
 class Course #technology {
-    - CourseID: String
-    - CourseName: String
-    - CourseDescription: String
-    - EnrolledLearners: List
-    - PreRequisites: List
+    - courseID: String
+    - courseName: String
+    - courseDescription: String
+    - enrolledLearners: Array
+    - preRequisites: Array
 }
 
 class Class #technology {
-    - ClassID: String
-    - ClassName: String
-    - StartDate: Date
-    - EndDate: Date
-    - StartTime: Time
-    - EndTime:Time
-    - ClassSize: int
-    - TrainerName:String
-    - MaxEnrollment: int
-    - EnrollmentStartDate: Date
-    - EnrollmentEndDate: Date
+    - classID: String
+    - className: String
+    - trainerName:String
+    - classSize: int
+    - startDate: Date
+    - endDate: Date
+    - startTime: Time
+    - endTime:Time
+    - maxEnrollment: int
+    - enrollmentStartDate: Date
+    - enrollmentEndDate: Date
 }
 
-class Chapter #technology {
-    - SectionID: String
-    - SectionName: String
+class Lesson #technology {
+    - lessonID: String
+    - lessonName: String
+    - lessonMaterials
 }
 
-class CourseMaterials #technology {
-    - Documents: List?
-    - Videos: List?
-    - Hyperlinks: List
+package Quiz {
+    Quiz <|.. GradedQuiz
+    Quiz <|.. UngradedQuiz
+    Quiz -- Question
 }
 
 abstract class Quiz #technology {
-    - QuizID: String
-    - QuizName: String
-    - QuizDuration: Time
+    - quizID: String
+    - quizName: String
+    - quizType: String
+    - quizDuration: Time
     
 }
 
+class Question #technology {
+    - description: String
+    - options: Array
+    - guess: int
+
+}
+
 class GradedQuiz #technology {
-    - TotalScore: int
-    - LearnerScore: int
+    - totalScore: int
+    - learnerScore: int
 }
 
 class UngradedQuiz #technology {
     - passed: Boolean
 }
-
-' class CourseDataAccess #motivation {
-
-' }
-
-' class CRDataAccess #motivation {
-'     + Create(CRDetails)
-'     + findLearner()
-' }
-
-' class DataAccess #motivation {
-
-' }
-
-' class Authenticate #business {
-
-' }
-
-' class Controller #implementation {
-
-' }
 @enduml
