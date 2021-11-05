@@ -17,7 +17,8 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 - **Back-End**: Python Flask
 - **Database**: MongoDB Atlas
 - **Testing**: Python unittest, mongomock
-- **CI**: Jenkins
+- **Continuous Integration (CI)**: Jenkins
+- **Deployment**: Heroku
 - **Design**: [PlantUML](https://plantuml.com/)
 
 ## Directory Layout
@@ -70,5 +71,3 @@ To run the tests, run the following:
 cd api 
 python -m unittest discover
 ```
-
-
