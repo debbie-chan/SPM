@@ -2,6 +2,8 @@ from flask import request, jsonify
 from pymongo import ReturnDocument
 from src.controllers.utils import JSONEncoder
 from src.database import mongo
+from src.controllers.user import Learner
+from src.controllers.course import Course, Class
 
 
 class UserController:
@@ -91,10 +93,56 @@ class AdminController:
         return JSONEncoder().encode(data)
 
     @staticmethod
+    def verifyLearner(username, courseCode, classCode):
+        learnerObj = Learner(mongo.db.user.find_one({"username": username}))
+        courseObj = Course(
+            mongo.db.course.find_one({"courseCode": courseCode})
+        )
+        classObj = Class(
+            mongo.db["class"].find_one(
+                {
+                    "$and": [
+                        {"courseCode": courseCode},
+                        {"classCode": classCode},
+                    ]
+                }
+            )
+        )
+
+        if (
+            learnerObj.ifPreReqMet(courseObj.getPreRequisites())
+            and learnerObj.ifNotCompleted(courseCode)
+            and learnerObj.ifNotEnrolled(courseCode)
+            and classObj.ifNotFull()
+            and classObj.ifEnrollmentOpen()
+        ):
+            return jsonify({"message": "Learner is eligible."}), 200
+        elif not learnerObj.ifPreReqMet(courseObj.getPreRequisites()):
+            return jsonify({"message": "PreRequisites not met."}), 500
+        elif not learnerObj.ifNotCompleted(courseCode):
+            return jsonify({"message": "Course completed before."}), 500
+        elif not learnerObj.ifNotEnrolled(courseCode):
+            return (
+                jsonify(
+                    {"message": "Learner is already enrolled in this course."}
+                ),
+                500,
+            )
+        elif not classObj.ifNotFull():
+            return jsonify({"message": "Class full."}), 500
+        elif not classObj.ifEnrollmentOpen():
+            return jsonify({"message": "Outside enrollment period."}), 500
+        else:
+            return jsonify({"message": "Failed."}), 500
+
+    @staticmethod
     def assignLearnerToClass(username, courseCode, classCode):
         data = mongo.db.user.find_one_and_update(
             {"username": username},
-            {"$set": {"enrolledCourses." + courseCode: classCode}},
+            {
+                "$set": {"enrolledCourses." + courseCode: classCode},
+                "$unset": {"pendingCourses." + courseCode: classCode},
+            },
             return_document=ReturnDocument.AFTER,
         )
         return JSONEncoder().encode(data)
