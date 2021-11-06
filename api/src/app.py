@@ -7,6 +7,10 @@ from src.controllers.user_controller import (
     AdminController,
     LearnerController,
 )
+
+from src.controllers.quiz import Quiz
+from src.controllers.quiz_controller import QuizController
+from src.controllers.question_controller import QuestionController
 from src.database import mongo
 
 
@@ -75,6 +79,24 @@ def create_app(db_uri: str) -> Flask:
         "/<string:classCode>",
         methods=["GET"],
         view_func=LearnerController.deletePendingCourse,
+    )
+
+    # question/quiz routes
+    app.add_url_rule(
+        "/addQuestions",
+        methods=["POST"],
+        view_func=QuestionController.addQuestions,
+    )
+    app.add_url_rule(
+        "/getQuiz/<string:lessonCode>", methods=["GET"], view_func=Quiz.getQuiz
+    )
+    app.add_url_rule(
+        "/gradeQuiz", methods=["POST"], view_func=QuizController.gradeQuiz
+    )
+    app.add_url_rule(
+        "/getFinalGrade/<string:username>/<string:courseCode>",
+        methods=["GET"],
+        view_func=Quiz.getFinalGrade,
     )
 
     return app
