@@ -109,7 +109,6 @@ def create_app(db_uri: str) -> Flask:
         view_func=Quiz.getFinalGrade,
     )
 
-    
     # course routes
     app.add_url_rule(
         "/course", methods=["GET"], view_func=CourseController.getAllCourses
