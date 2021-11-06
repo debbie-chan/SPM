@@ -1,9 +1,7 @@
-from flask import request, jsonify
 import json
 from bson import ObjectId
 from datetime import datetime, date
-from pprint import pprint
-from src.database import mongo
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -12,3 +10,8 @@ class JSONEncoder(json.JSONEncoder):
         if isinstance(o, (datetime, date)):
             return o.isoformat()
         return json.JSONEncoder.default(self, o)
+
+
+class DatetimeConverter:
+    def strToDatetime(o):
+        return datetime.strptime(o["$date"], "%Y-%m-%dT%H:%M:%S.000Z")
