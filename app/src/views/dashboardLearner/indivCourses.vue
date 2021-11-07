@@ -1,17 +1,22 @@
 <template>
   <v-row>
-    <h1>Course 1 : Class 1</h1>
-    <v-col cols="12">
+    <h1>{{lessons[0].classCode}} : Class 1</h1>
+    <v-col cols="12"
+      v-for= '(lesson, key) in lessons' :key= 'key'>
       <v-card>
-        <v-card-title>Chapter 1</v-card-title>
-        <indiv-class-table></indiv-class-table>
+        <v-card-title> {{lesson.lessonName}} </v-card-title>
+        <indiv-class-table
+        :lessons= lesson>
+        </indiv-class-table>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
+
 import indivClassTable from './indivClassTable.vue'
+import axiosIns from '@/plugins/axios'
 
 export default {
   components: {
@@ -20,13 +25,18 @@ export default {
   setup() {
     return {}
   },
-  data: () => ({
-    items: [
-      { title: 'Chapter 1' },
-      { title: 'Chapter 2' },
-      { title: 'Chapter 3' },
-      { title: 'Chapter 4' },
-    ],
-  }),
+  data() {
+    return {
+      lessons: [],
+    }
+  },
+  mounted() {
+    axiosIns
+      .get('http://localhost:5000/lessons/X1010/G1')
+      .then(response => {
+        this.lessons = response.data
+        console.log(this.lessons)
+      })
+  },
 }
 </script>
