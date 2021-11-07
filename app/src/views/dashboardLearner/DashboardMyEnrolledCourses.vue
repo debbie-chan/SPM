@@ -1,11 +1,11 @@
 <template>
   <v-card class="greeting-card">
     <v-card-title class="text-no-wrap pt-4 ps-4 pb-2">
-      Completed Courses
+      My Courses
     </v-card-title>
     <v-row class="ma-2 pa-0 ">
       <v-card
-        v-for= "(value,key) in completedCourses" :key="key"
+        v-for= "(value,key) in myEnrolledCourses" :key="key"
         class="mx-10 mt-3 mb-5 col-md-2"
         max-width="344"
         outlined
@@ -29,7 +29,8 @@
         <v-card-actions>
           <v-btn
             medium
-            color='primary'
+            color= "primary"
+            to = "/Learner/indivCourse"
           >
             Go to Class
           </v-btn>
@@ -79,6 +80,6 @@
 
 <script>
 export default {
-  props: ['completedCourses'],
+  props: ['myEnrolledCourses'],
 }
 </script>

@@ -4,7 +4,7 @@
             Question 2
         </v-card-title>
         <v-card-text>
-            <v-text> This is T/F question</v-text>
+            This is T/F question
             <v-radio-group v-model="radioGroup">
               <v-radio
                   v-for= "index in ['True', 'False']"

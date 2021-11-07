@@ -7,7 +7,7 @@
           <v-text> This is MCQ</v-text>
           <v-radio-group v-model="radioGroup">
             <v-radio
-              v-for= "index in 4"
+              v-for= "index in quiz.quiz.options1"
               :key="index"
               :label="`Option ${index}`"
             ></v-radio>

@@ -1,11 +1,19 @@
 <template>
   <v-card class="greeting-card">
     <v-card-title class="text-no-wrap pt-4 ps-4 pb-2">
-      Completed Courses
+      My Pending Courses
+      <v-btn
+            medium
+            color= "primary"
+            to = "/allCourses"
+            class = 'ml-5'
+          >
+        Browse More Courses
+      </v-btn>
     </v-card-title>
     <v-row class="ma-2 pa-0 ">
       <v-card
-        v-for= "(value,key) in completedCourses" :key="key"
+        v-for= "(value,key) in myPendingCourses" :key="key"
         class="mx-10 mt-3 mb-5 col-md-2"
         max-width="344"
         outlined
@@ -29,9 +37,10 @@
         <v-card-actions>
           <v-btn
             medium
-            color='primary'
+            color= "primary"
+            @click= "withdraw(key,value)"
           >
-            Go to Class
+            Withdraw
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -78,7 +87,17 @@
 </style>
 
 <script>
+import axiosIns from '@/plugins/axios'
+
 export default {
-  props: ['completedCourses'],
+  props: ['myPendingCourses'],
+  methods: {
+    withdraw(courseCode, classCode) {
+      const link = `http://localhost:5000/deletePendingCourse/emmajones/${courseCode}/${classCode}`
+      axiosIns
+        .get(link)
+        .then(window.location.reload())
+    },
+  },
 }
 </script>
