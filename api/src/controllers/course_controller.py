@@ -26,6 +26,29 @@ class CourseController:
         data["_id"] = str(data["_id"])
         return jsonify(data), 201
 
+    @staticmethod
+    def displayAllCourses():
+        '''
+        response: [{classCode: ["classCode"], courseCode: "courseCode", courseName: "courseName", courseDescription: "courseDescription"}, {}, {}]
+        '''
+        # response = {}
+        courseDocs = list(mongo.db["course"].find())
+
+        response = []
+        for course in courseDocs:
+            courseCode = course["courseCode"]
+            classDocs = list(mongo.db["class"].find({"courseCode": courseCode}))
+            for classDoc in classDocs:
+                resp_dict = {}
+                courseName = course["courseName"]
+                courseDescription = course["courseDescription"]
+                resp_dict["courseCode"] = courseCode
+                resp_dict["courseName"] = courseName
+                resp_dict["courseDescription"] = courseDescription
+                classCode = classDoc["classCode"]
+                resp_dict["classCode"] = classCode
+                response.append(resp_dict)
+        return JSONEncoder().encode(response), 200
 
 class ClassController:
     @staticmethod
