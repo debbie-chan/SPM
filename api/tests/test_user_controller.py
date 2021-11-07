@@ -162,6 +162,12 @@ class TestAdminController(unittest.TestCase):
         self.assertEqual(response_valid.status_code, 200)
         self.assertEqual(response_invalid.status_code, 404)
 
+    def test_verifyLearner(self):
+        response_valid = self.app.get("/verifyLearner/emmajones/X7845/G1")
+        response_invalid = self.app.get("/verifyLearner/emmajones/X100/G1")
+        self.assertEqual(response_valid.status_code, 200)
+        self.assertEqual(response_invalid.status_code, 500)
+
     def test_assignLearnerToClass(self):
         response_valid = self.app.get(
             "/assignLearnerToClass/emmajones/X1010/G1"
