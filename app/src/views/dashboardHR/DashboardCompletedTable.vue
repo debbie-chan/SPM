@@ -2,7 +2,7 @@
   <v-card>
     <v-data-table
       :headers="headers"
-      :items="usreList"
+      :items="completedCourses"
       item-key="course_name"
       class="table-rounded"
       hide-default-footer
@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import { mdiSquareEditOutline, mdiDotsVertical } from '@mdi/js'
-import data from './datatable-data'
 
 export default {
   setup() {
@@ -41,14 +39,8 @@ export default {
         { text: 'START DATE', value: 'start_date' },
         { text: 'END DATE', value: 'end_date' },
       ],
-      usreList: data,
-
-      // icons
-      icons: {
-        mdiSquareEditOutline,
-        mdiDotsVertical,
-      },
     }
   },
+  props: ['completedCourses'],
 }
 </script>
