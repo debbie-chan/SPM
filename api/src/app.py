@@ -128,6 +128,11 @@ def create_app(db_uri: str) -> Flask:
         methods=["POST"],
         view_func=CourseController.createCourse,
     )
+    app.add_url_rule(
+        "/course/displayAllCourses",
+        methods=["GET"],
+        view_func=CourseController.displayAllCourses,
+    )
 
     # class routes
     app.add_url_rule(
