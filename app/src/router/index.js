@@ -24,9 +24,14 @@ const routes = [
     component: () => import('@/views/dashboardHR/indivCourse/indivCourse.vue'),
   },
   {
-    path: '/Learner/takeQuiz',
-    name: 'takeQuiz',
-    component: () => import('@/views/takeQuiz/takeQuiz.vue'),
+    path: '/Learner/takeQuiz/X1010G1L1',
+    name: 'L1takeQuiz',
+    component: () => import('@/views/takeQuiz/takeQuizL1.vue'),
+  },
+  {
+    path: '/Learner/takeQuiz/X1010G1L2',
+    name: 'L2takeQuiz',
+    component: () => import('@/views/takeQuiz/takeQuizL2.vue'),
   },
   {
     path: '/dashboardTrainer',
@@ -49,9 +54,14 @@ const routes = [
     component: () => import('@/views/dashboardHR/Dashboard.vue'),
   },
   {
-    path: '/editClass',
-    name: 'editClass',
-    component: () => import('@/views/dashboardHR/editClass/editAssignedStudents.vue'),
+    path: '/assignStudent',
+    name: 'assignStudent',
+    component: () => import('@/views/dashboardHR/assignStudent/editAssignedStudents.vue'),
+  },
+  {
+    path: '/assignTrainer',
+    name: 'assignTrainer',
+    component: () => import('@/views/dashboardHR/assignTrainer/assignTrainer.vue'),
   },
   {
     path: '/trainer/quizCreation',
@@ -69,11 +79,6 @@ const routes = [
     component: () => import('@/views/dashboardHR/courseCreation/addNewCourse.vue'),
   },
   {
-    path: '/typography',
-    name: 'typography',
-    component: () => import('@/views/typography/Typography.vue'),
-  },
-  {
     path: '/icons',
     name: 'icons',
     component: () => import('@/views/icons/Icons.vue'),
@@ -82,11 +87,6 @@ const routes = [
     path: '/cards',
     name: 'cards',
     component: () => import('@/views/cards/Card.vue'),
-  },
-  {
-    path: '/simple-table',
-    name: 'simple-table',
-    component: () => import('@/views/simple-table/SimpleTable.vue'),
   },
   {
     path: '/form-layouts',

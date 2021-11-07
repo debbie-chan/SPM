@@ -5,7 +5,7 @@
     </v-card-title>
     <v-row class="ma-2 pa-0 ">
       <v-card
-        v-for= "index in 4" :key="index"
+        v-for= "(value, key) in completedCourses" :key="key"
         class="mx-10 mt-3 mb-5 col-md-2"
         max-width="344"
         outlined
@@ -13,11 +13,11 @@
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="text-h5 mb-1">
-              Course {{index}}
+              {{key}}
             </v-list-item-title>
-            <v-list-item-subtitle>
-              Class {{index}}
-            </v-list-item-subtitle>
+            <v-list-item-title class="text-h6 mb-1">
+              {{value}}
+            </v-list-item-title>
           </v-list-item-content>
           <v-list-item-avatar
             tile
@@ -76,3 +76,9 @@
   }
 }
 </style>
+
+<script>
+export default {
+  props: ['completedCourses'],
+}
+</script>

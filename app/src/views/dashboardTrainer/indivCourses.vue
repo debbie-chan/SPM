@@ -1,15 +1,15 @@
 <template>
   <v-row>
     <v-col cols = '12'>
-      <h1>Course 1 : Class 1</h1>
+      <h1>{{lessons[0].classCode}}</h1>
     </v-col>
     <v-col cols= '9'>
         <v-btn
           color="primary"
           dark
-          @click = allChapters()
+          @click = newLesson()
         >
-          Add Chapter
+          Add Lesson
         </v-btn>
     </v-col>
     <v-col cols= '3'>
@@ -22,12 +22,12 @@
         </v-btn>
     </v-col>
     <v-col cols="12"
-    v-for = 'chapter in chapters'
-    :key = 'chapter'>
+      v-for= '(lesson, index) in lessons'
+      :key= 'index'>
       <v-card>
         <v-card-title>
           <v-col cols = '10'>
-            Chapter {{chapter.number}}
+            {{lesson.lessonName}}
           </v-col>
           <v-col cols = '2'>
             <v-btn
@@ -40,23 +40,27 @@
           </v-col>
         </v-card-title>
         <v-simple-table>
-          <template>
-            <thead>
-              <tr>
-                <th class="text-uppercase">
-                  Syllabus Outline
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="item in chapter.classMaterials"
-                :key="item"
-              >
-                <td>{{ item }}</td>
-              </tr>
-            </tbody>
-          </template>
+        <template>
+          <thead>
+            <tr>
+              <th class="text-uppercase">
+                Description
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for= "(value, key) in lesson.hyperlinks"
+              :key="key"
+            >
+              <td>
+                <a v-bind:href= "value.link">
+                  {{value.description}}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </template>
         </v-simple-table>
       </v-card>
     </v-col>
@@ -66,36 +70,47 @@
 <script>
 
 // import indivClassTable from './indivClassTable.vue'
+import axiosIns from '@/plugins/axios'
 
 export default {
-  components: {
-
-    // indivClassTable,
+  setup() {
+    return {}
   },
   data() {
-    const chapters = [
-      {
-        number: 1,
-        classMaterials: ['Class Material 1', 'Class Material 2', 'Class Material 3', 'Quiz 1', 'Quiz 2'],
-      },
-    ]
-
     return {
-      chapters,
+      lessons: [],
+      nextLessonNumber: 0,
+      lessonCode: '',
     }
   },
-  methods: {
-    newChapter() {
-      this.chapters.push({
-        number: 2,
+  mounted() {
+    axiosIns
+      .get('http://localhost:5000/lessons/X1010/G1')
+      .then(response => {
+        this.lessons = response.data
+        this.nextLessonNumber = this.lessons.length + 1
       })
-    },
   },
-  computed: {
-    allChapters() {
-      this.newChapter()
+  methods: {
+    newLesson() {
+      this.lessonCode = `${this.lessons[0].courseCode}${this.lessons[0].classCode}L${this.nextLessonNumber}`
+      console.log(this.lessonCode)
+      axiosIns
+        .post('http://localhost:5000/lesson/createLesson', {
+          lessonName: `Week${this.nextLessonNumber.toString()}`,
+          hyperlinks: [],
+          quiz: [],
+          classCode: this.lessons[0].classCode,
+          lessonCode: `${this.lessons[0].courseCode}${this.lessons[0].classCode}L${this.nextLessonNumber}`,
+          courseCode: this.lessons[0].courseCode,
+        })
+        .then(res => {
+          console.log(res)
+          window.location.reload()
+        })
+    },
+    newMaterial() {
 
-      return this.chapters
     },
   },
 }
