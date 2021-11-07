@@ -40,6 +40,11 @@ class TestCourseController(unittest.TestCase):
     def test_createCourse(self):
         pass
 
+    def test_displayAllCourses(self): 
+        response = self.app.get("/course/displayAllCourses")
+        self.assertEqual(response.status_code, 200)
+
+
 
 # Led By: Joslyn Ho
 class TestClassController(unittest.TestCase):
