@@ -1,38 +1,42 @@
 <template>
   <div>
     <h1>All Courses</h1>
+    <v-alert type="success"
+      v-show = showAlert>
+      You've successfully enrolled in the course.
+    </v-alert>
     <br>
     <v-row>
       <!-- card explore -->
       <v-col
-        md="4"
-        sm="6"
-        cols="12"
-        class="align-self-start"
-        v-for = 'index in courses'
+        v-for = '(value, index) in classes'
         :key="index"
+        cols="5"
+        class="align-self-start"
       >
         <v-card>
-          <v-img
-            src="@/assets/images/pages/card-basic-person.png"
-            height="250"
-          ></v-img>
           <v-card-title>
-            Course {{index.course_number}}
-            <v-chip
-              class="ma-2"
-            >
-              Eligible
-            </v-chip>
+            {{value.courseName}}
+          </v-card-title>
+          <v-card-text>
             <v-btn
               medium
               color= 'primary'
-              class= 'ml-5 font-weight-semibold'>
+              class= 'ml-5 mt-5 font-weight-semibold'
+              @click = 'enroll(value.courseCode, value.classCode)'
+              :disabled='verified[index] === "rejected"'
+            >
               Enroll
             </v-btn>
-          </v-card-title>
-          <v-card-text>
-            {{index.course_description}}
+            <p class = 'mt-4'>
+              Course Code: {{value.courseCode}}
+            </p>
+            <p class = 'mt-4'>
+              Class: {{value.classCode}}
+            </p>
+            <p>
+              Description: {{value.courseDescription}}
+            </p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -41,27 +45,51 @@
 </template>
 
 <script>
+import axiosIns from '@/plugins/axios'
 
 export default {
-  setup() {
-    const courses = [
-      {
-        course_number: 1,
-        course_description: 'Course Description1 Here',
-      },
-      {
-        course_number: 2,
-        course_description: 'Course Description2 Here',
-      },
-      {
-        course_number: 3,
-        course_description: 'Course Description3 Here',
-      },
-    ]
-
+  data() {
     return {
-      courses,
+      classes: [],
+      showCards: [],
+      showAlert: false,
+      verified: [],
     }
   },
+  mounted() {
+    const promises = []
+    const promiseResults = []
+    axiosIns
+      .get('http://localhost:5000/course/displayAllCourses')
+      .then(response => {
+        this.classes = response.data
+        for (let i = 0; i < response.data.length; i += 1) {
+          promises.push(axiosIns
+            .get(`http://localhost:5000/verifyLearner/emmajones/${response.data[i].courseCode}/${response.data[i].classCode}`))
+        }
+        console.log(promises)
+        Promise.allSettled(promises)
+          .then(results => {
+            results.forEach(result => {
+              console.log(typeof (result.status))
+              promiseResults.push(result.status)
+            })
+          })
+        console.log(promiseResults)
+        this.verified = promiseResults
+        console.log(this.verified)
+      })
+  },
+  methods: {
+    enroll(courseCode, classCode) {
+      axiosIns
+        .get(`http://localhost:5000/addPendingCourse/emmajones/${courseCode}/${classCode}`)
+        .then(response => {
+          this.showAlert = true
+          console.log(response)
+        })
+    },
+  },
 }
+
 </script>
