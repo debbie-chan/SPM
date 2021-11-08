@@ -60,7 +60,7 @@ class TestClassController(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_getOneClass(self):
-        response_valid = self.app.get("/api/class/G1")
+        response_valid = self.app.get("/api/class/X1010/G1")
         response_invalid = self.app.get("/api/class/ABC")
         self.assertEqual(response_valid.status_code, 200)
         self.assertEqual(response_invalid.status_code, 404)

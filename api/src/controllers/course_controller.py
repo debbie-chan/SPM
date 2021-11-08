@@ -35,6 +35,7 @@ class CourseController:
                 courseCode: "courseCode",
                 courseName: "courseName",
                 courseDescription: "courseDescription",
+                preRequisites: []
             },
             {},
             {},
@@ -46,6 +47,7 @@ class CourseController:
         response = []
         for course in courseDocs:
             courseCode = course["courseCode"]
+            preRequisites = course["preRequisites"]
             classDocs = list(
                 mongo.db["class"].find({"courseCode": courseCode})
             )
@@ -58,6 +60,7 @@ class CourseController:
                 resp_dict["courseDescription"] = courseDescription
                 classCode = classDoc["classCode"]
                 resp_dict["classCode"] = classCode
+                resp_dict["preRequisites"] = preRequisites
                 response.append(resp_dict)
         return JSONEncoder().encode(response), 200
 
@@ -69,8 +72,10 @@ class ClassController:
         return JSONEncoder().encode(classes), 200
 
     @staticmethod
-    def getOneClass(classCode):
-        oneClass = mongo.db["class"].find_one_or_404({"classCode": classCode})
+    def getOneClass(courseCode, classCode):
+        oneClass = mongo.db["class"].find_one_or_404(
+            {"$and": [{"courseCode": courseCode, "classCode": classCode}]}
+        )
         return JSONEncoder().encode(oneClass), 200
 
     @staticmethod
