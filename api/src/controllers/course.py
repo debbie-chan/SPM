@@ -16,10 +16,10 @@ class Class:
     def __init__(self, classDoc):
         self.__classDoc = classDoc
 
-    def ifNotFull(self):
+    def ifFull(self):
         return (
             self.__classDoc["currentEnrollment"]
-            < self.__classDoc["maxEnrollment"]
+            == self.__classDoc["maxEnrollment"]
         )
 
     def ifEnrollmentOpen(self):

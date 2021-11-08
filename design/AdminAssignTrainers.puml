@@ -1,0 +1,14 @@
+@startuml
+
+!include style.puml
+skinparam maxMessageSize 100
+
+title Assign Trainer To Class
+participant ":web app" as WebApp 
+participant ":AdminController" as AdminController 
+
+autonumber
+WebApp -> AdminController: :assignTrainerToClass()
+AdminController -> AdminController: :update document in class and user collection
+
+@enduml

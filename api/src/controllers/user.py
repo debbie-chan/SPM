@@ -9,8 +9,8 @@ class Learner:
                 status = False
         return status
 
-    def ifNotCompleted(self, courseCode):
-        return courseCode not in self.__learnerDoc["completedCourses"]
+    def ifCompleted(self, courseCode):
+        return courseCode in self.__learnerDoc["completedCourses"]
 
-    def ifNotEnrolled(self, courseCode):
-        return courseCode not in self.__learnerDoc["enrolledCourses"]
+    def ifEnrolled(self, courseCode):
+        return courseCode in self.__learnerDoc["enrolledCourses"]

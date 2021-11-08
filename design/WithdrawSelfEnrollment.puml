@@ -1,0 +1,14 @@
+@startuml
+
+!include style.puml
+skinparam maxMessageSize 100
+
+title Withdraw Self-Enrollment
+participant ":web app" as WebApp 
+participant ":LearnerController" as LearnerController
+
+autonumber
+WebApp ->  LearnerController: :deletePendingCourse()
+LearnerController ->  LearnerController: :update document in user collection 
+
+@enduml

@@ -53,17 +53,21 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
    ```
    pip install -r requirements.txt
    ```
-2. Run Flask App 
+2. Run the server-side Flask app in one terminal window
    ```
    cd api
    python main.py
    ```
-3. Run Vue App
+   Navigate to http://localhost:5000
+   
+3. Run the client-side Vue app in a different terminal window
    ```
-   cd ../app
+   cd app
    yarn install 
    yarn serve
    ```
+   Navigate to http://localhost:8080
+   
 
 ## Testing
 To run the tests, run the following: 
@@ -71,3 +75,5 @@ To run the tests, run the following:
 cd api 
 python -m unittest discover
 ```
+
+

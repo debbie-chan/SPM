@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 from mongomock import MongoClient
-from src.app import create_app
-import src.database
+from ..src.app import create_app
+from ..src import database
 
 
 class PyMongoMock(MongoClient):
@@ -13,7 +13,7 @@ class PyMongoMock(MongoClient):
 # Led By: Jessie Ng
 class TestQuestionController(unittest.TestCase):
     def setUp(self):
-        self.patcher = patch.object(src.database, "mongo", PyMongoMock())
+        self.patcher = patch.object(database, "mongo", PyMongoMock())
         self.app = create_app(
             "mongodb+srv://dbAdmin:Ve08ByJJOk5RNhWK"
             "@clusterlms.k10xd.mongodb.net/lms"
@@ -35,6 +35,6 @@ class TestQuestionController(unittest.TestCase):
         }
 
         response_question = self.app.post(
-            "/addQuestions", json=request_questions
+            "/api/addQuestions", json=request_questions
         )
         self.assertEqual(response_question.status_code, 200)

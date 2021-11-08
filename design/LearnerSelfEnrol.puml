@@ -1,0 +1,24 @@
+@startuml
+
+!include style.puml
+skinparam maxMessageSize 100
+
+title Learner self-enrol in class
+participant ":web app" as WebApp 
+participant ":AdminController" as AdminController 
+participant ":LearnerController" as LearnerController 
+participant ":Learner" as Learner
+
+autonumber
+WebApp ->  AdminController: :verifyLearner()
+AdminController -> Learner: :ifPreReqMet(), :ifNotCompleted(), :ifNotEnrolled() 
+note right: if learner is ineligible to enrol in class, return error message
+AdminController -> Class: :ifNotFull(), :ifEnrollmentOpen() 
+note right: if class can no longer accept enrolments, return error message
+WebApp -> LearnerController: :addPendingCourse() 
+LearnerController -> LearnerController: :update record in user document
+WebApp -> AdminController: :assignLearnerToClass()
+AdminController -> AdminController: :update record in user document
+
+
+@enduml

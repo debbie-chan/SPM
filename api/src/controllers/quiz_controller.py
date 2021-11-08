@@ -1,7 +1,7 @@
 from flask import request
 from pymongo import ReturnDocument
-from src.controllers.utils import JSONEncoder
-from src.database import mongo
+from .utils import JSONEncoder
+from ..database import mongo
 
 
 class QuizController:

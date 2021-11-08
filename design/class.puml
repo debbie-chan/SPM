@@ -2,100 +2,99 @@
 !include style.puml
 
 package User {
-    User <|.. Admin
-    User <|.. Trainer
-    User <|.. Learner
-    
+    class UserController
+    class AdminController
+    class Learner
+    class LearnerController
+    Learner -- AdminController
 }
 
-package Course {
-    Trainer -- Class
-    Learner -- Class
-    Course *-- Class
-    Class *-- Lesson
-    Class *-- GradedQuiz
-    Lesson *-- UngradedQuiz
+class UserController #pink {
+    + getAllUsers()
+    + getAllOfRole(userRole)
+    + getEnrolledLearners(courseCode, classCode)
+    + getPendingLearners(courseCode, classCode)
+    + getUnenrolledLearners(courseCode, classCode)
+    + getOneUser(userRole, username)
+    + createUser()
 }
 
-abstract class User #technology {
-    - userID: String
-    - username: String
-    - password: hash
-    - designation: String
-    - department: String
-}
-
-class Admin #technology {
-}
-
-class Trainer #technology {
-    - trainingCourses: Array
-    - trainedCourses: Array
-
+class AdminController #pink {
+    + assignTrainerToClass(username, courseCode, classCode)
+    + verifyLearner(username, courseCode, classCode)
+    + assignLearnerToClass(username, courseCode, classCode)
 }
 
 class Learner #technology {
-    - enrolledCourses: Array
-    - attemptedCourses: Array
-    - completedCourses: Array
-    + SelfEnroll(CourseID): Boolean
+    - learnerDoc
+    + ifPreReqMet(preRequisites)
+    + ifNotCompleted(courseCode)
+    + ifNotEnrolled(courseCode)
+}
+
+class LearnerController #pink {
+    + addPendingCourse(username, courseCode, classCode)
+    + deletePendingCourse(username, courseCode, classCode)
+}
+
+package Course {
+    class Course
+    class CourseController
+    class Class
+    class ClassController
+    class LessonController
+    Course -- AdminController
+    Class -- AdminController
 }
 
 class Course #technology {
-    - courseID: String
-    - courseName: String
-    - courseDescription: String
-    - enrolledLearners: Array
-    - preRequisites: Array
+    - courseDoc
+    + getPreRequisites()
+}
+
+class CourseController #pink {
+    + getAllCourses()
+    + getOneCourse(courseCode)
+    + getAllClassesInCourse(courseCode)
+    + createCourse()
 }
 
 class Class #technology {
-    - classID: String
-    - className: String
-    - trainerName:String
-    - classSize: int
-    - startDate: Date
-    - endDate: Date
-    - startTime: Time
-    - endTime:Time
-    - maxEnrollment: int
-    - enrollmentStartDate: Date
-    - enrollmentEndDate: Date
+    - classDoc
+    + ifNotFull()
+    + ifEnrollmentOpen()
 }
 
-class Lesson #technology {
-    - lessonID: String
-    - lessonName: String
-    - lessonMaterials
+class ClassController #pink {
+    + getAllClasses()
+    + getOneClass(classCode)
+    + createClass()
+}
+
+class LessonController #pink {
+    + getAllLessonsInClass(courseCode, classCode)
+    + createLesson()
 }
 
 package Quiz {
-    Quiz <|.. GradedQuiz
-    Quiz <|.. UngradedQuiz
-    Quiz -- Question
+    class Quiz
+    class QuizController
+    class QuestionController
 }
 
-abstract class Quiz #technology {
-    - quizID: String
-    - quizName: String
-    - quizType: String
-    - quizDuration: Time
-    
+class Quiz #technology {
+    + getQuiz(lessonCode)
+    + getFinalGrade(username, courseCode)
+    + updateCompletedCourses(username)
 }
 
-class Question #technology {
-    - description: String
-    - options: Array
-    - guess: int
+class QuizController #pink {
+    + gradeQuiz()
 
 }
 
-class GradedQuiz #technology {
-    - totalScore: int
-    - learnerScore: int
+class QuestionController #pink {
+    + addQuestions()
 }
 
-class UngradedQuiz #technology {
-    - passed: Boolean
-}
 @enduml

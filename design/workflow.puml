@@ -1,0 +1,18 @@
+@startuml Class
+!include style.puml
+
+|Member 1|
+start
+:Pull code from **development** branch;
+:Create a new **feature** / **bug** branch;
+:Create test cases;
+:Implement feature / Fix bug;
+:Test implemented code;
+:**Push** code to branch;
+:Create **Pull Request**;
+|Member 2|
+:Review **Pull Request**;
+:Merge to **development** branch 
+and delete feature/bug branch;
+stop
+@enduml

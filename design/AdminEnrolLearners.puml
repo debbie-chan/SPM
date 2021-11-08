@@ -1,0 +1,14 @@
+@startuml
+
+!include style.puml
+skinparam maxMessageSize 100
+
+title Admin Enrol Learners
+participant ":web app" as WebApp 
+participant ":AdminController" as AdminController 
+
+autonumber
+WebApp -> AdminController: :assignLearnerToClass()
+AdminController -> AdminController: :update document in user collection
+
+@enduml

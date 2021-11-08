@@ -1,9 +1,9 @@
 from flask import request, jsonify
 from pymongo import ReturnDocument
-from src.controllers.utils import JSONEncoder
-from src.database import mongo
-from src.controllers.user import Learner
-from src.controllers.course import Course, Class
+from .utils import JSONEncoder
+from ..database import mongo
+from .user import Learner
+from .course import Course, Class
 
 
 class UserController:
@@ -111,24 +111,24 @@ class AdminController:
 
         if (
             learnerObj.ifPreReqMet(courseObj.getPreRequisites())
-            and learnerObj.ifNotCompleted(courseCode)
-            and learnerObj.ifNotEnrolled(courseCode)
-            and classObj.ifNotFull()
+            and not learnerObj.ifCompleted(courseCode)
+            and not learnerObj.ifEnrolled(courseCode)
+            and not classObj.ifFull()
             and classObj.ifEnrollmentOpen()
         ):
             return jsonify({"message": "Learner is eligible."}), 200
         elif not learnerObj.ifPreReqMet(courseObj.getPreRequisites()):
             return jsonify({"message": "PreRequisites not met."}), 500
-        elif not learnerObj.ifNotCompleted(courseCode):
+        elif learnerObj.ifCompleted(courseCode):
             return jsonify({"message": "Course completed before."}), 500
-        elif not learnerObj.ifNotEnrolled(courseCode):
+        elif learnerObj.ifEnrolled(courseCode):
             return (
                 jsonify(
                     {"message": "Learner is already enrolled in this course."}
                 ),
                 500,
             )
-        elif not classObj.ifNotFull():
+        elif classObj.ifFull():
             return jsonify({"message": "Class full."}), 500
         elif not classObj.ifEnrollmentOpen():
             return jsonify({"message": "Outside enrollment period."}), 500
