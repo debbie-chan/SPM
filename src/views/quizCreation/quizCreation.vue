@@ -1,5 +1,11 @@
 <template>
   <v-form>
+    <v-btn
+      color="primary"
+      class= 'mb-5'
+      to= '/dashboardTrainer'>
+        Back to Dashboard
+    </v-btn>
   <v-row>
     <v-col cols="12" v-show = "showAlert">
       <v-alert type="success">

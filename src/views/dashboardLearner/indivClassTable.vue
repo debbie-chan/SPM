@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th class="text-uppercase">
-            Description
+            Lesson Materials
           </th>
         </tr>
       </thead>
@@ -20,9 +20,14 @@
           </td>
         </tr>
         <tr>
-          <td>
-            <a v-bind:href= "'/Learner/takeQuiz/' + lessons.lessonCode">
-              Quiz 1
+          <td v-if = "getLessonNum(lessons.lessonCode) < parseInt(numLessons, 10)">
+            <a v-bind:href= "'/Learner/takeQuiz/' + courseCode + '/' + classCode + '/' + lessons.lessonCode ">
+              Quiz
+            </a>
+          </td>
+          <td v-else>
+            <a v-bind:href= "'/Learner/takeFinalQuiz/' + courseCode + '/' + classCode + '/' + lessons.lessonCode ">
+              Final Quiz
             </a>
           </td>
         </tr>
@@ -32,7 +37,27 @@
 </template>
 
 <script>
+
 export default {
-  props: ['lessons'],
+  setup() {
+    return {}
+  },
+  data() {
+    return {
+      lessonNum: '',
+      endpoint: '',
+    }
+  },
+  props: ['courseCode', 'classCode', 'lessons', 'numLessons'],
+  methods: {
+    getLessonNum(lessonCode) {
+      this.lessonNum = parseInt(lessonCode.substr(lessonCode.length - 1), 10)
+
+      return this.lessonNum
+    },
+    debug(event) {
+      console.log(typeof event)
+    },
+  },
 }
 </script>

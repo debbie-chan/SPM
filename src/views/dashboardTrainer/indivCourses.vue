@@ -1,5 +1,11 @@
 <template>
   <v-row>
+    <v-btn
+      color="primary"
+      class= 'mb-5'
+      to= '/dashboardTrainer'>
+        Back to Dashboard
+    </v-btn>
     <v-col cols = '12'>
       <h1>{{ courseCode }} {{ classCode }}</h1>
     </v-col>

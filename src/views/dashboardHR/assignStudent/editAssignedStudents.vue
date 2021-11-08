@@ -1,9 +1,17 @@
 <template>
   <v-row>
     <v-col cols = '12'>
+    <v-btn
+      color="primary"
+      class= 'mb-5'
+      to= '/dashboardHR'>
+        Back to Dashboard
+    </v-btn>
+    </v-col>
+    <v-col cols = '12'>
       <v-card>
         <v-card-title>
-          X1010 - G1
+          {{courseCode}} - {{classCode}}
         </v-card-title>
       </v-card>
     </v-col>
@@ -123,25 +131,25 @@ export default {
       showAllStudents: false,
       pendingStudents: [],
       allStudents: [],
-      courseCode: 'X1010',
-      classCode: 'G1',
+      courseCode: this.$route.params.courseCode,
+      classCode: this.$route.params.classCode,
     }
   },
   mounted() {
     axiosIns
-      .get('/getEnrolledLearners/X1010/G1')
+      .get(`/getEnrolledLearners/${this.courseCode}/${this.classCode}`)
       .then(response => {
         console.log(response.data)
         this.assignedStudents = response.data
       })
     axiosIns
-      .get('/getPendingLearners/X1010/G1')
+      .get(`/getPendingLearners/${this.courseCode}/${this.classCode}`)
       .then(response => {
         console.log(response.data)
         this.pendingStudents = response.data
       })
     axiosIns
-      .get('/getUnenrolledLearners/X1010/G1')
+      .get(`/getUnenrolledLearners/${this.courseCode}/${this.classCode}`)
       .then(response => {
         console.log(response.data)
         this.allStudents = response.data

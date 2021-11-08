@@ -1,5 +1,13 @@
 <template>
   <v-row>
+    <v-col>
+      <v-btn
+      color="primary"
+      class= 'mb-5'
+      to= '/dashboardHR'>
+        Back to Dashboard
+    </v-btn>
+    </v-col>
    <v-col cols="12">
       <v-card>
         <v-card-title>
@@ -12,7 +20,7 @@
       </v-card>
        </v-col>
     <v-col cols = "12">
-      <table-of-classes :classes= classes></table-of-classes>
+      <table-of-classes :courseCode= courseCode :classes= classes></table-of-classes>
     </v-col>
   </v-row>
 

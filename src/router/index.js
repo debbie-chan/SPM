@@ -24,14 +24,14 @@ const routes = [
     component: () => import('@/views/dashboardHR/indivCourse/indivCourse.vue'),
   },
   {
-    path: '/Learner/takeQuiz/X1010G1L1',
-    name: 'L1takeQuiz',
-    component: () => import('@/views/takeQuiz/takeQuizL1.vue'),
+    path: '/Learner/takeQuiz/:courseCode/:classCode/:lessonCode',
+    name: 'takeQuiz',
+    component: () => import('@/views/takeQuiz/takeQuiz.vue'),
   },
   {
-    path: '/Learner/takeQuiz/X1010G1L2',
-    name: 'L2takeQuiz',
-    component: () => import('@/views/takeQuiz/takeQuizL2.vue'),
+    path: '/Learner/takeFinalQuiz/:courseCode/:classCode/:lessonCode',
+    name: 'takeFinalQuiz',
+    component: () => import('@/views/takeQuiz/takeFinalQuiz.vue'),
   },
   {
     path: '/dashboardTrainer',
@@ -54,12 +54,12 @@ const routes = [
     component: () => import('@/views/dashboardHR/Dashboard.vue'),
   },
   {
-    path: '/assignStudent',
+    path: '/assignStudent/:courseCode/:classCode',
     name: 'assignStudent',
     component: () => import('@/views/dashboardHR/assignStudent/editAssignedStudents.vue'),
   },
   {
-    path: '/assignTrainer',
+    path: '/assignTrainer/:courseCode/:classCode',
     name: 'assignTrainer',
     component: () => import('@/views/dashboardHR/assignTrainer/assignTrainer.vue'),
   },

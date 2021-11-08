@@ -29,12 +29,12 @@
               {{value.classCode}}
           </td>
           <td>
-              <a href="/assignStudent" >
+              <a :href="'/assignStudent/' + courseCode + '/' + value.classCode" >
                 {{value.currentEnrollment}}
               </a>
           </td>
           <td v-if = 'value.trainerName===""'>
-              <a href= "/assignTrainer">
+              <a :href="'/assignTrainer/' + courseCode + '/' + value.classCode">
                 Assign Trainer
               </a>
           </td>
@@ -56,6 +56,6 @@
 <script>
 
 export default {
-  props: ['classes'],
+  props: ['courseCode', 'classes'],
 }
 </script>
