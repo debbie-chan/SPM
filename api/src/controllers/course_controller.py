@@ -1,6 +1,6 @@
 from flask import request, jsonify
-from src.controllers.utils import JSONEncoder
-from src.database import mongo
+from .utils import JSONEncoder
+from ..database import mongo
 
 
 class CourseController:
@@ -28,16 +28,27 @@ class CourseController:
 
     @staticmethod
     def displayAllCourses():
-        '''
-        response: [{classCode: ["classCode"], courseCode: "courseCode", courseName: "courseName", courseDescription: "courseDescription"}, {}, {}]
-        '''
+        """
+        response: [
+            {
+                classCode: ["classCode"],
+                courseCode: "courseCode",
+                courseName: "courseName",
+                courseDescription: "courseDescription",
+            },
+            {},
+            {},
+        ]
+        """
         # response = {}
         courseDocs = list(mongo.db["course"].find())
 
         response = []
         for course in courseDocs:
             courseCode = course["courseCode"]
-            classDocs = list(mongo.db["class"].find({"courseCode": courseCode}))
+            classDocs = list(
+                mongo.db["class"].find({"courseCode": courseCode})
+            )
             for classDoc in classDocs:
                 resp_dict = {}
                 courseName = course["courseName"]
@@ -49,6 +60,7 @@ class CourseController:
                 resp_dict["classCode"] = classCode
                 response.append(resp_dict)
         return JSONEncoder().encode(response), 200
+
 
 class ClassController:
     @staticmethod

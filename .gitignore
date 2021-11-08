@@ -1,5 +1,14 @@
-*.pyc
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+.DS_Store
 
+*.log
+*/common
+*/*/common
+*.db
+
+# Gitignore for visys/portfe
 .DS_Store
 node_modules/
 /dist

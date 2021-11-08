@@ -1,0 +1,19 @@
+@startuml
+
+!include style.puml
+skinparam maxMessageSize 100
+
+title Learner take Final Quiz
+participant ":web app" as WebApp 
+participant ":quiz" as Quiz 
+participant ":quiz_controller" as quizController
+
+autonumber
+WebApp ->  Quiz: :getQuiz() 
+Quiz -> WebApp: :Return quiz from lesson document 
+WebApp -> quizController: :gradeQuiz()
+WebApp -> Quiz: :getFinalGrade()
+Quiz -> WebApp: :Return final quiz grade from user document 
+
+
+@enduml

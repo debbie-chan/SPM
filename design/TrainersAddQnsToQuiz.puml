@@ -1,0 +1,15 @@
+@startuml
+
+!include style.puml
+skinparam maxMessageSize 100
+
+title Trainers Add Questions to Quiz
+participant ":web app" as WebApp 
+participant ":question_controller" as question_controller
+
+
+autonumber
+WebApp ->  question_controller: :addQuestions() 
+question_controller -> question_controller: : Update lesson document with quiz 
+
+@enduml

@@ -1,11 +1,11 @@
-from src.controllers.utils import JSONEncoder
-from src.database import mongo
+from .utils import JSONEncoder
+from ..database import mongo
 
 
 class Quiz:
     def __init__(self, QuizDoc):
         self.__QuizDoc = QuizDoc
-        
+
     @staticmethod
     def getQuiz(lessonCode):
         lessonDoc = mongo.db.lesson.find_one_or_404({"lessonCode": lessonCode})
