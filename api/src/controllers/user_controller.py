@@ -137,6 +137,11 @@ class AdminController:
 
     @staticmethod
     def assignLearnerToClass(username, courseCode, classCode):
+        mongo.db["class"].find_one_and_update(
+            {"$and": [{"courseCode": courseCode}, {"classCode": classCode}]},
+            {"$inc": {"currentEnrollment": 1}},
+            return_document=ReturnDocument.AFTER,
+        )
         data = mongo.db.user.find_one_and_update(
             {"username": username},
             {

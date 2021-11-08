@@ -18,13 +18,14 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 - **Database**: MongoDB Atlas
 - **Testing**: Python unittest, mongomock
 - **Continuous Integration (CI)**: Jenkins
-- **Deployment**: Heroku
+- **Continuous Deployment (CD)**: Heroku
 - **Design**: [PlantUML](https://plantuml.com/)
 
 ## Directory Layout
 - `api` contains the Flask application
 - `api/tests` contains backend tests
-- `app` contains the Vue app 
+- `public` contains the static assets
+- `src` contains the Vue app 
 - `design` contains PlantUML documents for all UML diagrams
 
 ```
@@ -33,19 +34,18 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 │   ├───src
 │   │   ├───controllers
 │   ├───tests
-├───app
-│   ├───public
-│   └───src
-│       ├───assets
-│       ├───components
-│       ├───layouts
-│       ├───plugins
-│       ├───router
-│       ├───store
-│       ├───styles
-│       ├───utils
-│       └───views
-└───design
+├───public
+└───src
+│   ├───assets
+│   ├───components
+│   ├───layouts
+│   ├───plugins
+│   ├───router
+│   ├───store
+│   ├───styles
+│   ├───utils
+│   └───views
+├───design
 ```
 
 ## Installation and Running
@@ -62,7 +62,6 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
    
 3. Run the client-side Vue app in a different terminal window
    ```
-   cd app
    yarn install 
    yarn serve
    ```
@@ -72,7 +71,6 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 ## Testing
 To run the tests, run the following: 
 ```
-cd api 
 python -m unittest discover
 ```
 

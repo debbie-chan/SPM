@@ -147,7 +147,7 @@ def create_app(db_uri: str) -> Flask:
         "/api/class", methods=["GET"], view_func=ClassController.getAllClasses
     )
     app.add_url_rule(
-        "/api/class/<string:classCode>",
+        "/api/class/<string:courseCode>/<string:classCode>",
         methods=["GET"],
         view_func=ClassController.getOneClass,
     )

@@ -28,6 +28,20 @@ class CourseController:
 
     @staticmethod
     def displayAllCourses():
+        """
+        response: [
+            {
+                classCode: ["classCode"],
+                courseCode: "courseCode",
+                courseName: "courseName",
+                courseDescription: "courseDescription",
+                preRequisites: []
+            },
+            {},
+            {},
+        ]
+        """
+        # response = {}
         courseDocs = list(mongo.db["course"].find())
 
         response = []
@@ -58,8 +72,10 @@ class ClassController:
         return JSONEncoder().encode(classes), 200
 
     @staticmethod
-    def getOneClass(classCode):
-        oneClass = mongo.db["class"].find_one_or_404({"classCode": classCode})
+    def getOneClass(courseCode, classCode):
+        oneClass = mongo.db["class"].find_one_or_404(
+            {"$and": [{"courseCode": courseCode, "classCode": classCode}]}
+        )
         return JSONEncoder().encode(oneClass), 200
 
     @staticmethod

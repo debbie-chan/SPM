@@ -60,7 +60,6 @@ class TestUserController(unittest.TestCase):
         self.assertEqual(response_invalid.status_code, 404)
 
 
-# Led By: Deborah Chan
 class TestAdminController(unittest.TestCase):
     def setUp(self):
         self.patcher = patch.object(database, "mongo", PyMongoMock())
@@ -100,7 +99,6 @@ class TestAdminController(unittest.TestCase):
         self.assertEqual(response_invalid.status_code, 404)
 
 
-# Led By: Deborah Chan
 class TestLearnerController(unittest.TestCase):
     def setUp(self):
         self.patcher = patch.object(database, "mongo", PyMongoMock())

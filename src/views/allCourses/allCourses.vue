@@ -1,5 +1,13 @@
 <template>
   <div>
+    <v-btn
+      medium
+      color= 'primary'
+      class= 'mt-5 mb-5 font-weight-semibold'
+      to = '/dashboardLearner'
+    >
+      Back to Dashboard
+    </v-btn>
     <h1>All Courses</h1>
     <v-alert type="success"
       v-show = showAlert>
@@ -36,6 +44,15 @@
             </p>
             <p>
               Description: {{value.courseDescription}}
+            </p>
+            <p v-if = "value.preRequisites[0]">
+              Pre-requisites:
+              <span v-for = "prereq in value.preRequisites" :key="prereq">
+              {{prereq}}
+              </span>
+            </p>
+            <p v-else>
+              Pre-requisites: -
             </p>
           </v-card-text>
         </v-card>

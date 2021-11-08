@@ -3,7 +3,7 @@
     <v-col cols = '12'>
       <v-card>
         <v-card-title>
-          X1010 - G2
+          {{courseCode}} - {{classCode}}
         </v-card-title>
         <v-card-subtitle>
           Trainer: {{currentTrainer}}
@@ -53,8 +53,8 @@ export default {
     return {
       currentTrainer: '',
       allTrainers: [],
-      courseCode: 'X1010',
-      classCode: 'G2',
+      courseCode: this.$route.params.courseCode,
+      classCode: this.$route.params.classCode,
     }
   },
   mounted() {
@@ -64,7 +64,7 @@ export default {
         this.allTrainers = response.data
       })
     axiosIns
-      .get('/class/G2')
+      .get(`/class/${this.courseCode}/${this.classCode}`)
       .then(response => {
         console.log(response.data)
         this.currentTrainer = response.data.trainerName
