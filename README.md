@@ -19,7 +19,7 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 - **Testing**: Python unittest, mongomock
 - **Continuous Integration (CI)**: Jenkins
 - **Continuous Deployment (CD)**: Heroku
-- **Design**: [PlantUML](https://plantuml.com/)
+- **Design**: Lucidchart, [PlantUML](https://plantuml.com/)
 
 ## Directory Layout
 - `api` contains the Flask application
@@ -53,7 +53,8 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
    ```
    pip install -r requirements.txt
    ```
-2. Run the server-side Flask app in one terminal window
+2. Run the server-side Flask app in one terminal window.
+   <br />Change line 2 of main.py from `from .src.app import create_app` to `from src.app import create_app`.
    ```
    cd api
    python main.py
