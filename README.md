@@ -11,6 +11,7 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 - [Notion](https://www.notion.so/Women-in-SPM-d509d76b290144bfbeb869ff806ee5eb), our home page for the project
 - [Jira](https://g7t8.atlassian.net/jira/software/projects/G7T8/boards/1), for planning and conducting sprints
 - [GitHub](https://github.com/debbie-chan/spm), for version control
+- Figma, for Sprint Retrospectives
 
 ## Application Technologies
 - **Front-End**: Vue.js, Vuetify
@@ -35,7 +36,7 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 │   │   ├───controllers
 │   ├───tests
 ├───public
-└───src
+├───src
 │   ├───assets
 │   ├───components
 │   ├───layouts
@@ -45,7 +46,7 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
 │   ├───styles
 │   ├───utils
 │   └───views
-├───design
+└───design
 ```
 
 ## Installation and Running
@@ -59,7 +60,7 @@ All-In-One is a leading Printing Solution Equipment Servicing company. To addres
    cd api
    python main.py
    ```
-   Navigate to http://localhost:5000
+   Navigate to http://localhost:5000/api
    
 3. Run the client-side Vue app in a different terminal window
    ```
